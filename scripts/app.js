@@ -27,7 +27,7 @@ async function getMovie(url) {
 }
 getMovie(createURL(TOP_POPULAR_MOVIES_URL, countPage));
 
-/*Оонтовка рейтинга */
+/*Оконтовка рейтинга */
 const getColourByrating = (ratingNum) => {
   if (ratingNum >= 7) {
     return 'green';
@@ -95,7 +95,14 @@ const showMovies = (data) => {
               )
               .join('')}
           </ul>
-          <div class="movie__info-country">${element.countries[0].country}</div>
+          <ul class="movie__info-country">
+          ${element.countries
+            .map(
+              (country) =>
+                `<li class="movie__info-country-item">${country.country}</li> `
+            )
+            .join('')}
+             </ul>
               ${
                 element.ratingKinopoisk
                   ? `<div class="movie__info-rating movie__info-rating--` +
