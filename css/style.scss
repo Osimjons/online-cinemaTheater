@@ -112,7 +112,7 @@ body {
   transition: scale 0.3 ease;
 
   @media(hover: hover) {
-    &:hover{
+    &:hover {
       cursor: pointer;
       // стили для эффекта увеличения при наведении
       transform: scale(1.1); // увеличиваем изображение
@@ -225,7 +225,9 @@ body {
       position: absolute;
       width: 35px;
       aspect-ratio: 1;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       z-index: 2;
       top: 3%;
       left: 3%;
