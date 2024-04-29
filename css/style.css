@@ -31,7 +31,7 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding-block: 10px;
+  padding-block: 30px;
   min-height: 72px;
 }
 .header__logo {
@@ -41,17 +41,17 @@ body {
   text-align: center;
   padding-inline: 10px;
 }
-.header__searh {
+.header__search {
   position: relative;
   border-radius: 5px;
   overflow: hidden;
 }
-.header__searh-input {
+.header__search-input {
   height: 100%;
   padding: 10px;
   min-width: 260px;
 }
-.header__searh-btn {
+.header__search-btn {
   position: absolute;
   top: 0;
   right: 0;
@@ -65,7 +65,7 @@ body {
   -webkit-transition: all 0.15ms ease;
   transition: all 0.15ms ease;
 }
-.header__searh-btn:active {
+.header__search-btn:active {
   background-color: #313131;
   color: #fff;
 }

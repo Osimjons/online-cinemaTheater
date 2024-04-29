@@ -31,7 +31,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-block: 10px;
+    padding-block: 30px;
     min-height: 72px;
   }
 
@@ -45,7 +45,7 @@ body {
   }
 
   // .header__searh
-  &__searh {
+  &__search {
     position: relative;
     border-radius: 5px;
     overflow: hidden;

@@ -1,16 +1,23 @@
 'use strict';
 let countPage = 1;
-
+const page = '&page=';
 const API_KEY = 'b4a69180-85c8-496d-b61b-e425b53940ba';
 const ALTARNATE_API = 'ZY3PAB1-K824RD2-QEFMHY7-Z7739TH';
 const baseURL = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/';
-const TOP_POPULAR_MOVIES_URL = 'collections?type=TOP_POPULAR_MOVIES&page=';
+const TOP_POPULAR_MOVIES_URL = 'collections?type=TOP_POPULAR_MOVIES';
+const SEARCH_BY_KEYWORDS =
+  'https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=';
 
 /*Сборка URL запроса */
-function createURL(url, count) {
-  let fullUrl = baseURL + url + count;
+function createURL(url, count = 1) {
+  let fullUrl = baseURL + url + page + count;
   return fullUrl;
 }
+/*Ссылка поиска по ключевым словам  */
+const seachFilmByKeywords = () => {
+  const fullUrl = baseURL + SEARCH_BY_KEYWORDS + page + countPage;
+  return fullUrl;
+};
 
 /*Запрос на сервер  */
 async function getMovie(url) {
@@ -102,7 +109,7 @@ const showMovies = (data) => {
                 `<li class="movie__info-country-item">${country.country}</li> `
             )
             .join('')}
-             </ul>
+          </ul>
               ${
                 element.ratingKinopoisk
                   ? `<div class="movie__info-rating movie__info-rating--` +
@@ -115,3 +122,16 @@ const showMovies = (data) => {
     movies.appendChild(movie);
   });
 };
+
+const form = document.querySelector('.header__search');
+const inputElement = document.querySelector('.header__search-input');
+setTimeout(() => {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const apiSearchUrl = `${SEARCH_BY_KEYWORDS}${inputElement.value}`;
+    if (inputElement.value.trim().length > 0) {
+      console.log('apiSearchUrl: ', apiSearchUrl);
+      getMovie(apiSearchUrl);
+    }
+  });
+}, 1000);
