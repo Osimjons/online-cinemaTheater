@@ -82,7 +82,9 @@ navigatePages();
 const showMovies = (data) => {
   const movies = document.querySelector('.movies');
   movies.innerHTML = '';
-  data.items.forEach((element) => {
+  const keyToProcess =
+    'films' in data ? 'films' : 'items' in data ? 'items' : null;
+  data[keyToProcess].forEach((element) => {
     const movie = document.createElement('div');
     movie.classList.add('movies__movie', 'movie');
     movie.innerHTML = `
@@ -123,15 +125,15 @@ const showMovies = (data) => {
   });
 };
 
+/*Реализация поиска по ключевым словам  */
 const form = document.querySelector('.header__search');
 const inputElement = document.querySelector('.header__search-input');
-setTimeout(() => {
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const apiSearchUrl = `${SEARCH_BY_KEYWORDS}${inputElement.value}`;
-    if (inputElement.value.trim().length > 0) {
-      console.log('apiSearchUrl: ', apiSearchUrl);
-      getMovie(apiSearchUrl);
-    }
-  });
-}, 1000);
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const apiSearchUrl = `${SEARCH_BY_KEYWORDS}${inputElement.value}`;
+  if (inputElement.value.trim().length > 0) {
+    console.log('apiSearchUrl: ', apiSearchUrl);
+    getMovie(apiSearchUrl);
+  }
+});
