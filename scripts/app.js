@@ -7,6 +7,7 @@ const baseURL = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/';
 const TOP_POPULAR_MOVIES_URL = 'collections?type=TOP_POPULAR_MOVIES';
 const SEARCH_BY_KEYWORDS =
   'https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=';
+const movieId = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/';
 
 /*Сборка URL запроса */
 function createURL(url, count = 1) {
@@ -121,6 +122,9 @@ const showMovies = (data) => {
               }
         </div>
       `;
+    movie.addEventListener('click', () => {
+      getModalId(element.kinopoiskId);
+    });
     movies.appendChild(movie);
   });
 };
@@ -137,3 +141,153 @@ form.addEventListener('submit', (e) => {
     getMovie(apiSearchUrl);
   }
 });
+
+/*Реализация модального окна */
+
+const modal = document.querySelector('.modal');
+
+async function getModal(url) {
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'X-API-KEY': API_KEY,
+      'Content-Type': 'application/json',
+    },
+  });
+  const respData = await response.json();
+  showModal(respData);
+}
+
+function getModalId(id) {
+  const idUrl = movieId + id;
+  getModal(idUrl);
+}
+
+function showModal(data) {
+  modal.classList.add('active');
+  document.body.classList.add('no-scroll');
+  modal.innerHTML = `
+<div class="container">
+  <div class="modal__wrapper">
+    <img class="modal__img" src=${data.posterUrl} alt="${data.nameRu}">
+    <div class="modal__header">
+      <h1 class="modal__header-tilte">${data.nameRu}</h1>
+    </div>
+    <div>
+      <h2 class="modal__header-year">Год: ${data.year}</h2>
+    </div>
+    <div class="modal__info">
+      <div class="modal__info-genre">Жанр: ${data.genres
+        .map((genre) => {
+          return (
+            '<span class="movie__info-ganre-item">' + genre.genre + '</span>'
+          );
+        })
+        .join(' ')}
+      </div>
+      <div class="modal__info-genre">Страна: ${data.countries
+        .map((country) => {
+          return (
+            '<span class="movie__info-ganre-item">' +
+            country.country +
+            '</span>'
+          );
+        })
+        .join(' ')}
+      </div>
+    ${
+      data.filmLength
+        ? `<div class="modal__info-length"><span>Продолжительность: ${data.filmLength} мин.</span></div>`
+        : ''
+    } 
+      <div class="modal__info-links">Сайт: <a href=${data.webUrl}
+          class="modal__info-link movie__info-ganre-item">${
+            data.webUrl
+          }</a></div>
+      <div class="modal__info-desc">
+        <p>${data.description}</p>
+      </div>
+    </div>
+    <div class="modal__close">
+      <button class="modal__close-Btn">Закрыть</button>
+    </div>
+  </div>
+</div>
+  `;
+  console.log(data);
+  const modalClose = document.querySelector('.modal__close-Btn');
+  modalClose.addEventListener('click', (e) => {
+    document.body.classList.remove('no-scroll');
+    modal.classList.remove('active');
+  });
+}
+window.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    document.body.classList.remove('no-scroll');
+    modal.classList.remove('active');
+  }
+});
+
+/*
+// 'new ArrayBuffer'.split('')
+const setLi = (genre) => {
+  return `<li class="movie__info-ganre-item"> ${genre}</li>`;
+};
+
+for (let i = 0; i <= ['drama'].length; i++) {
+  setLi(['drama'][i]);
+}
+
+
+['drama'][`<li class="movie__info-ganre-item">drama</li>`];
+
+const setLi = (genre) => {
+  return `<li class="movie__info-ganre-item"> ${genre}</li>`;
+};
+
+const genres = ['drama'];
+const newArr = [`<li class="movie__info-ganre-item">drama</li>`];
+
+for (let i = 0; i <= genres.length; i++) {
+  const li = setLi(genres[i]);
+  newArr.push(li);
+}
+
+
+
+[
+    {
+        genre: 'drama'
+    }
+].map((element) => element.genre)
+
+
+
+
+const setLi = (genre) => {
+    return `<li class="movie__info-ganre-item"> ${genre.genre}</li>`
+}
+
+const newArr = element.genres.map(setLi).join('')
+
+<ul class="movie__info-ganre">
+    ${newArr}
+</ul>
+
+
+
+['drama']
+[`<li class="movie__info-ganre-item">drama</li>`]
+
+const setLi = (genre) => {
+    return `<li class="movie__info-ganre-item"> ${genre}</li>`
+}
+
+const genres = ['drama']
+const newArr = [`<li class="movie__info-ganre-item">drama</li>`]
+
+for (let i = 0; i <= genres.length; i++) {
+    const li = setLi(genres[i])
+    newArr.push(li)
+}
+*/
