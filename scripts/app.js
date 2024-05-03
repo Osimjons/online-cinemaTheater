@@ -200,7 +200,9 @@ function showModal(data) {
         ? `<div class="modal__info-length"><span>Продолжительность: ${data.filmLength} мин.</span></div>`
         : ''
     } 
-      <div class="modal__info-links">Сайт: <a href=${data.webUrl}
+      <div class="modal__info-links">Сайт: <a target="_blank" href=${
+        data.webUrl
+      }
           class="modal__info-link movie__info-ganre-item">${
             data.webUrl
           }</a></div>
