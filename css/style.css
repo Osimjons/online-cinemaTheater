@@ -22,7 +22,6 @@ body {
 
 .container {
   max-width: 1460px;
-  overflow: hidden;
   padding-inline: 15px;
   margin-inline: auto;
 }
@@ -279,7 +278,7 @@ body {
   bottom: 0;
   left: 0;
   max-width: 100%;
-  max-height: 100%;
+  max-height: 100dvh;
   z-index: 999;
   display: none;
   -webkit-box-align: center;
@@ -300,6 +299,7 @@ body {
   display: flex;
   scale: 1;
   padding: 10px;
+  max-height: 100dvh;
 }
 .modal__wrapper {
   padding: 15px;
