@@ -24,7 +24,7 @@ body {
 
 .container {
   max-width: 1460px;
-  // overflow: hidden;
+  overflow: hidden;
   padding-inline: 15px;
   margin-inline: auto;
 }
@@ -94,15 +94,15 @@ body {
   justify-items: center;
   cursor: pointer;
 
-  @media (max-width:769px) {
+  @media (max-width:1024px) {
     grid-template-columns: repeat(3, minmax(24%, 1fr));
   }
 
-  @media (max-width:650px) {
+  @media (max-width:850px) {
     grid-template-columns: repeat(2, minmax(24%, 1fr));
   }
 
-  @media (max-width:450px) {
+  @media (max-width:550px) {
     grid-template-columns: 1fr;
   }
 }
@@ -306,9 +306,10 @@ body {
   transition: all 0.3s ease-in-out;
   
   &.active {
-    overflow: auto;
+    overflow-y: auto;
     display: flex;
     scale: 1;
+    padding: 10px;
   }
 
   // .modal__wrapper
@@ -364,6 +365,7 @@ body {
     // .modal__info-genre
     &-genre {
       display: flex;
+      flex-wrap: wrap;
       gap: 5px;
     }
 

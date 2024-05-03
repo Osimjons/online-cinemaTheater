@@ -22,6 +22,7 @@ body {
 
 .container {
   max-width: 1460px;
+  overflow: hidden;
   padding-inline: 15px;
   margin-inline: auto;
 }
@@ -86,17 +87,17 @@ body {
   justify-items: center;
   cursor: pointer;
 }
-@media (max-width: 769px) {
+@media (max-width: 1024px) {
   .movies {
     grid-template-columns: repeat(3, minmax(24%, 1fr));
   }
 }
-@media (max-width: 650px) {
+@media (max-width: 850px) {
   .movies {
     grid-template-columns: repeat(2, minmax(24%, 1fr));
   }
 }
-@media (max-width: 450px) {
+@media (max-width: 550px) {
   .movies {
     grid-template-columns: 1fr;
   }
@@ -293,11 +294,12 @@ body {
   transition: all 0.3s ease-in-out;
 }
 .modal.active {
-  overflow: auto;
+  overflow-y: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   scale: 1;
+  padding: 10px;
 }
 .modal__wrapper {
   padding: 15px;
@@ -352,6 +354,8 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   gap: 5px;
 }
 .modal__info-links * {
